@@ -45,6 +45,7 @@ jobs:
   build-docker:
     runs-on: ubuntu-latest
     needs: [build]
+    name: Build Docker image
     permissions:
       packages: write
     steps:
@@ -60,6 +61,7 @@ jobs:
   component-test:
     runs-on: ubuntu-latest
     needs: [build-docker]
+    name: Run component test
     steps:
       - name: Download code
         uses: actions/download-artifact@v3
@@ -71,6 +73,7 @@ jobs:
   performance-test:
     runs-on: ubuntu-latest
     needs: [build-docker]
+    name: Run performance test
     steps:
       - name: Download code
         uses: actions/download-artifact@v3
