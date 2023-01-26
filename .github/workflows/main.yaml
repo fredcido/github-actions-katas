@@ -1,19 +1,29 @@
-name: main-job
+name: JAVA CI
 on: push
 jobs:
-  main-job:
+  clone:
     runs-on: ubuntu-latest
-    container: gradle:6-jdk11
-    name: Github Actions kata
+    name: Clone the repo
     steps:
       - name: Clone-down
-        uses: actions/checkout@v3   
-      - name: build
-        run: ci/build-app.sh
-      - name: test
-        run: ci/unit-test-app.sh
+        uses: actions/checkout@v3
       - name: Upload Repo
         uses: actions/upload-artifact@v3
         with:
           name: code
           path: .
+  build:
+    runs-on: ubuntu-latest
+    container: gradle:6-jdk11
+    name: Build the code
+    needs: [clone]
+    steps:
+      - name: Download Clone artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: code
+          path: .
+      - name: build
+        run: ci/build-app.sh
+      - name: test
+        run: ci/unit-test-app.sh
