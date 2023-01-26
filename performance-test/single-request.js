@@ -13,11 +13,11 @@ export const requests = new Counter('http_reqs');
 
 
 export function setup() {
-    // 2. setup code, you can pass data to VU and teardown
-    sleep(3)
-    return true
-  }
-  
+  // 2. setup code, you can pass data to VU and teardown
+  sleep(3)
+  return true
+}
+
 
 // you can specify stages of your test (ramp up/down patterns) through the options object
 
@@ -42,7 +42,7 @@ export const options = {
 
     http_req_failed: ['rate<0.01'], // http errors should be less than 1%
 
-    http_req_duration: ['p(95)<200'], // 95% of requests should be below 200ms
+    http_req_duration: ['p(99)<200'], // 95% of requests should be below 200ms
 
 
 

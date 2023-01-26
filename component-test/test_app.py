@@ -14,7 +14,7 @@ class TestName(unittest.TestCase):
         url = self.url + "/status"
         response = requests.get(url, timeout=1)
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.encoding, 'ISO-8859-1')
+        self.assertEqual(response.encoding, 'UTF-8')
         self.assertTrue(re.match('Up and running', response.text))
 
 
