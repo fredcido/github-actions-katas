@@ -1,7 +1,7 @@
 name: main-job
 on: push
 jobs:
-  my-job:
+  main-job:
     runs-on: ubuntu-latest
     container: gradle:6-jdk11
     name: Github Actions kata
@@ -12,3 +12,8 @@ jobs:
         run: ci/build-app.sh
       - name: test
         run: ci/unit-test-app.sh
+      - name: Upload Repo
+        uses: actions/upload-artifact@v3
+        with:
+          name: code
+          path: .
